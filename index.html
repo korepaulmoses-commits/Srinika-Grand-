@@ -1,4 +1,4 @@
-ii<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,13 @@ ii<!DOCTYPE html>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         :root {
-            --gold: #d4af37;
-            --dark-gold: #b8860b;
-            --bg-light: #fcfaf5;
-            --text-main: #2c3e50;
+            --primary: #660000;      /* Professional Maroon */
+            --primary-dark: #4d0000; 
+            --accent: #b59a6d;       /* Champagne Gold */
+            --bg-light: #f4f1ea;     
+            --text-main: #333333;    
             --zomato-red: #cb202d;
+            --white: #ffffff;
         }
 
         body { 
@@ -24,112 +26,131 @@ ii<!DOCTYPE html>
             overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* HEADER & HERO IMAGE - UPDATED WITH REQUESTED IMAGE */
         header { 
-            background: linear-gradient(135deg, var(--gold), var(--dark-gold)); 
-            color: #fff; 
-            text-align: center; 
-            padding: 50px 20px; 
-            border-bottom: 5px solid #916f1f;
+            background: var(--primary-dark); 
+            border-bottom: 4px solid var(--accent);
+            position: relative;
+            overflow: hidden;
         }
-        header h1 { font-size: clamp(24px, 6vw, 45px); text-transform: uppercase; letter-spacing: 3px; }
-        header p { font-size: 14px; opacity: 0.9; margin-top: 8px; }
+        
+        .hero-banner {
+            width: 100%;
+            height: 320px;
+            /* USING THE REQUESTED JPG FILE FOR THE BACKGROUND */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('10000036136.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
 
-        /* STICKY NAVIGATION */
+        header h1 { 
+            font-size: clamp(26px, 8vw, 48px); 
+            text-transform: uppercase; 
+            letter-spacing: 5px; 
+            font-weight: 800; 
+            color: var(--accent);
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.8);
+        }
+        header p { 
+            font-size: clamp(13px, 3vw, 16px); 
+            color: #fff; 
+            letter-spacing: 2px; 
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* NAVIGATION */
         nav { 
-            background: #fff; 
+            background: var(--white); 
             display: flex; 
             justify-content: center; 
             position: sticky; 
             top: 0; 
             z-index: 1000; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1); 
             overflow-x: auto;
-            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
         nav a { 
             text-decoration: none; 
-            color: var(--text-main); 
+            color: var(--primary); 
             font-weight: 700; 
             text-transform: uppercase; 
-            font-size: 12px;
-            padding: 18px 15px;
-            display: inline-block;
+            font-size: 11px;
+            padding: 20px 15px;
+            flex-shrink: 0;
+            transition: 0.3s;
         }
-        nav a:hover { color: var(--gold); }
+        nav a:hover { color: var(--accent); background: #fffcf8; }
 
         .wrapper { max-width: 1100px; margin: 0 auto; padding: 15px; }
-        .page { display: none; }
-        .active { display: block; animation: fadeIn 0.3s ease-in; }
+        .page { display: none; width: 100%; }
+        .active { display: block !important; animation: fadeIn 0.4s ease-out; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         /* CARDS */
         .card { 
-            background: #fff; 
+            background: var(--white); 
             border-radius: 12px; 
-            padding: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            margin-bottom: 20px; 
+            padding: 25px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+            margin-bottom: 25px; 
             border: 1px solid #eee;
         }
-        h2 { color: var(--dark-gold); font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 5px; display: inline-block; }
+        h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 18px; border-left: 5px solid var(--accent); padding-left: 12px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* MENU STYLING */
         .menu-cat { 
-            background: var(--gold); color: white; padding: 8px; 
-            font-weight: 800; border-radius: 25px; margin: 25px 0 10px; 
-            text-align: center; font-size: 14px; 
+            background: var(--primary); color: var(--accent); padding: 12px; 
+            font-weight: 800; border-radius: 8px; margin: 35px 0 15px; 
+            text-align: center; font-size: 14px; letter-spacing: 2px;
         }
-        .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ddd; font-size: 14px; }
-        .item span:first-child { flex: 1; padding-right: 10px; }
-        .price { font-weight: bold; color: var(--dark-gold); min-width: 80px; text-align: right; }
+        .item { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f5f5f5; font-size: 14px; }
+        .item span:first-child { flex: 1; padding-right: 10px; font-weight: 500; }
+        .price { font-weight: 800; color: var(--primary); min-width: 85px; text-align: right; }
 
         /* FORMS */
-        .input-group { margin-bottom: 12px; }
-        label { display: block; font-size: 11px; font-weight: bold; color: #777; margin-bottom: 4px; text-transform: uppercase; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; background: #fafafa; }
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; background: var(--gold); color: white; transition: 0.2s; }
-        .btn:active { transform: scale(0.98); }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; font-size: 11px; font-weight: bold; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+        input, select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; outline: none; background: #fafafa; }
+        input:focus { border-color: var(--accent); background: #fff; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; background: var(--primary); color: #fff; transition: 0.3s; box-shadow: 0 4px 10px rgba(102, 0, 0, 0.2); }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
         
-        /* ZOMATO BUTTON */
-        .btn-zomato { 
-            background: var(--zomato-red); color: white; text-align: center; 
-            text-decoration: none; display: block; padding: 16px; 
-            border-radius: 8px; font-weight: bold; margin-top: 10px; 
-        }
+        .btn-zomato { background: var(--zomato-red); color: white; text-align: center; text-decoration: none; display: block; padding: 16px; border-radius: 8px; font-weight: bold; margin-top: 10px; }
 
-        /* GALLERY GRID */
-        .gallery-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-            gap: 10px; 
-        }
-        .gallery-grid img { 
-            width: 100%; height: 160px; object-fit: cover; 
-            border-radius: 8px; background: #eee; 
-        }
+        /* GALLERY & MAP */
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .gallery-grid img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 1px solid #ddd; }
+        .map-container { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; }
+        iframe { width: 100%; height: 100%; border: 0; }
 
-        /* LOCATION MAP */
-        .map-container { width: 100%; height: 450px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; border: 1px solid #ddd; }
+        footer { text-align: center; padding: 50px 20px; background: #1a1a1a; color: #888; font-size: 12px; border-top: 3px solid var(--accent); }
 
-        footer { text-align: center; padding: 40px 20px; background: #1a1a1a; color: #888; font-size: 13px; }
-
-        /* RESPONSIVE LAYOUT FOR LAPTOP/PC */
         @media (min-width: 768px) {
-            .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
             .gallery-grid { grid-template-columns: repeat(4, 1fr); }
-            header { padding: 80px 20px; }
-            nav a { font-size: 14px; padding: 22px 25px; }
-            .wrapper { padding: 30px; }
+            nav a { font-size: 13px; padding: 22px 30px; }
+            .hero-banner { height: 450px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>SRINIKA GRAND</h1>
-    <p>Premium Hospitality • Multi-Cuisine Excellence</p>
+    <div class="hero-banner">
+        <h1>SRINIKA GRAND</h1>
+        <p>Premium Hospitality • Multi-Cuisine Excellence</p>
+    </div>
 </header>
 
 <nav id="navbar">
@@ -145,26 +166,23 @@ ii<!DOCTYPE html>
         <div class="booking-grid">
             <div class="card">
                 <h2>🏨 Room Booking</h2>
-                <div class="input-group"><label>Name</label><input type="text" id="rName" placeholder="Enter full name"></div>
+                <div class="input-group"><label>Name</label><input type="text" id="rName" placeholder="Full Name"></div>
                 <div class="input-group"><label>Date</label><input type="date" id="rDate"></div>
                 <div class="input-group">
                     <label>Type</label>
-                    <select id="rType">
-                        <option>AC Rooms</option>
-                        <option>AC Deluxe</option>
-                    </select>
+                    <select id="rType"><option>AC Rooms</option><option>AC Deluxe</option></select>
                 </div>
-                <div class="input-group"><label>Contact</label><input type="tel" id="rAlt" placeholder="Secondary Number"></div>
+                <div class="input-group"><label>Contact</label><input type="tel" id="rAlt" placeholder="Mobile Number"></div>
                 <button class="btn" onclick="bookRoom()">Book via WhatsApp</button>
             </div>
 
             <div class="card">
                 <h2>🍴 Table Booking</h2>
-                <div class="input-group"><label>Name</label><input type="text" id="tName" placeholder="Enter name"></div>
+                <div class="input-group"><label>Name</label><input type="text" id="tName"></div>
                 <div class="input-group"><label>Date & Time</label>
                     <div style="display:flex; gap:5px;"><input type="date" id="tDate" style="flex:1.5"><input type="time" id="tTime" style="flex:1"></div>
                 </div>
-                <div class="input-group"><label>Contact</label><input type="tel" id="tAlt" placeholder="Contact Number"></div>
+                <div class="input-group"><label>Contact</label><input type="tel" id="tAlt" placeholder="Mobile Number"></div>
                 <button class="btn" onclick="bookTable()">Reserve Table</button>
             </div>
         </div>
@@ -178,16 +196,16 @@ ii<!DOCTYPE html>
             <div class="input-group"><label>Contact Number</label><input type="tel" id="pContact"></div>
             <button class="btn" onclick="enquirePG()">Send PG Enquiry</button>
         </div> 
+
         <div class="card" style="text-align: center; border-top: 4px solid var(--zomato-red);">
             <h3 style="color:var(--zomato-red); margin-bottom:10px;">Order Food Online</h3>
-            <p>Get Srinika Grand's delicious food delivered to your doorstep.</p>
             <a href="https://www.zomato.com/hyderabad/srinika-grand-shamshabad" target="_blank" class="btn-zomato">Order via Zomato</a>
         </div>
     </div>
 
     <div id="menu" class="page">
         <div class="card">
-            <h2 style="display:block; text-align:center;">Restaurant Menu</h2>
+            <h2 style="display:block; text-align:center; border:none;">RESTAURANT MENU</h2>
             
             <div class="menu-cat">SOUPS</div>
             <div class="item"><span>Chicken Corn Soup</span><span class="price">110.00</span></div>
@@ -260,13 +278,13 @@ ii<!DOCTYPE html>
         <div class="card">
             <h2>📸 Gallery</h2>
             <div class="gallery-grid">
-                <img src="1000036142.jpg" alt="Dining Area">
+                <img src="1000036142.jpg" alt="Dining">
                 <img src="1000036143.jpg" alt="Interior">
                 <img src="1000036140.jpg" alt="Hotel View">
                 <img src="1000036141.jpg" alt="Reception">
                 <img src="1000036138.jpg" alt="Room">
                 <img src="1000036137.jpg" alt="Room Interior">
-                <img src="1000036139.jpg" alt="Food Display">
+                <img src="1000036139.jpg" alt="Food">
                 <img src="1000036133.jpg" alt="Parking">
             </div>
         </div>
@@ -274,16 +292,15 @@ ii<!DOCTYPE html>
 
     <div id="location" class="page">
         <div class="card">
-            <h2>📍 Visit Srinika Grand</h2>
-            <div<div class="map-container">
-    <iframe src=https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3810.1026920997447!2d78.38409502378812!3d17.262266033603737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcbbd8d5aeeb729%3A0xa161d168b58d6636!2sSRINIKA%20GRAND!5e0!3m2!1sen!2sin!4v1775245111095!5m2!1sen!2sin width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div style="margin-top: 15px;">
+            <h2>📍 Visit Us</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3810.123456789!2d78.3881!3d17.2519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcba8c6a084606f%3A0xc3191f6305a2e5d6!2sShamshabad!5e0!3m2!1sen!2sin!4v123456789"></iframe>
+            </div>
+            <div style="margin-top: 15px;">
                 <p><strong>Address:</strong> Srinika Grand, Shamshabad, Hyderabad, Telangana.</p>
-                <p>>Hotel Phone:</strong> +91 95059 95058</p>
-                <p><strong>Table Reservation:</strong> +91 99511 45455</p>
+                <p><strong>Hotel Phone:</strong> +91 95059 95058</p>
             </div>
         </div>
-
     </div>
 
 </div>
@@ -294,7 +311,8 @@ ii<!DOCTYPE html>
 
 <script>
     function showPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
@@ -304,9 +322,8 @@ ii<!DOCTYPE html>
         let d = document.getElementById('rDate').value;
         let t = document.getElementById('rType').value;
         let c = document.getElementById('rAlt').value;
-        if(!n || !d || !c) return alert("Please fill Name, Date and Contact Number");
-        let msg = `*ROOM BOOKING - SRINIKA GRAND*%0AName: ${n}%0ADate: ${d}%0AType: ${t}%0AContact: ${c}`;
-        window.open(`https://wa.me/919505995058?text=${msg}`, '_blank');
+        if(!n || !d || !c) return alert("Please fill all details");
+        window.open(`https://wa.me/919505995058?text=*ROOM%20BOOKING*%0AName:%20${n}%0ADate:%20${d}%0AType:%20${t}%0AContact:%20${c}`, '_blank');
     }
 
     function bookTable() {
@@ -314,18 +331,16 @@ ii<!DOCTYPE html>
         let d = document.getElementById('tDate').value;
         let ti = document.getElementById('tTime').value;
         let c = document.getElementById('tAlt').value;
-        if(!n || !d || !ti || !c) return alert("Please fill Name, Date, Time and Contact");
-        let msg = `*TABLE BOOKING - SRINIKA GRAND*%0AName: ${n}%0ADate: ${d}%0ATime: ${ti}%0AContact: ${c}`;
-        window.open(`https://wa.me/919951145455?text=${msg}`, '_blank');
+        if(!n || !d || !ti) return alert("Please fill Name, Date and Time");
+        window.open(`https://wa.me/919951145455?text=*TABLE%20RESERVATION*%0AName:%20${n}%0ADate:%20${d}%0ATime:%20${ti}%0AContact:%20${c}`, '_blank');
     }
 
     function enquirePG() {
         let n = document.getElementById('pName').value;
         let s = document.getElementById('pSharing').value;
         let c = document.getElementById('pContact').value;
-        if(!n || !c) return alert("Please fill Name and Contact Number");
-        let msg = `*PG ENQUIRY - SRINIKA GRAND*%0AName: ${n}%0ASharing: ${s}%0AContact: ${c}`;
-        window.open(`https://wa.me/919505995058?text=${msg}`, '_blank');
+        if(!n || !c) return alert("Please fill Name and Contact");
+        window.open(`https://wa.me/919505995058?text=*PG%20ENQUIRY*%0AName:%20${n}%0ASharing:%20${s}%0AContact:%20${c}`, '_blank');
     }
 </script>
 
