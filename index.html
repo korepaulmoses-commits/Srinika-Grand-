@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Srinika Grand | Hotel, Restaurant & PG</title>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlCTD1ceANQ78sTpxzSWW4rH8mcJ7Hfa4&libraries=places"></script>
+
     <style>
         /* RESET & BASE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -15,6 +18,7 @@
             --bg-light: #f4f1ea;     
             --text-main: #333333;    
             --zomato-red: #cb202d;
+            --google-blue: #4285F4;
             --white: #ffffff;
         }
 
@@ -26,12 +30,27 @@
             overflow-x: hidden;
         }
 
-        /* HEADER & HERO IMAGE - UPDATED WITH REQUESTED IMAGE */
+        /* HEADER & HERO IMAGE */
         header { 
             background: var(--primary-dark); 
             border-bottom: 4px solid var(--accent);
             position: relative;
             overflow: hidden;
+        }
+        
+        .hero-banner {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('10000036136.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
         }
 
         header h1 { 
@@ -102,21 +121,22 @@
         .item span:first-child { flex: 1; padding-right: 10px; font-weight: 500; }
         .price { font-weight: 800; color: var(--primary); min-width: 85px; text-align: right; }
 
-        /* FORMS */
+        /* FORMS & BUTTONS */
         .input-group { margin-bottom: 18px; }
         label { display: block; font-size: 11px; font-weight: bold; color: #888; margin-bottom: 6px; text-transform: uppercase; }
         input, select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; outline: none; background: #fafafa; }
-        input:focus { border-color: var(--accent); background: #fff; }
         .btn { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; background: var(--primary); color: #fff; transition: 0.3s; box-shadow: 0 4px 10px rgba(102, 0, 0, 0.2); }
-        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
-        
         .btn-zomato { background: var(--zomato-red); color: white; text-align: center; text-decoration: none; display: block; padding: 16px; border-radius: 8px; font-weight: bold; margin-top: 10px; }
+        
+        /* REVIEW PROMO SECTION */
+        .promo-card { background: #fff8e1; border: 2px dashed var(--accent); text-align: center; padding: 25px; border-radius: 12px; margin-bottom: 25px; }
+        .btn-review { background: var(--google-blue); color: white; text-decoration: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 15px; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        .btn-review:hover { background: #357ae8; transform: scale(1.02); }
 
         /* GALLERY & MAP */
         .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .gallery-grid img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 1px solid #ddd; }
-        .map-container { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; }
-        iframe { width: 100%; height: 100%; border: 0; }
+        .map-container { width: 100%; height: 450px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; margin-top: 15px; }
 
         footer { text-align: center; padding: 50px 20px; background: #1a1a1a; color: #888; font-size: 12px; border-top: 3px solid var(--accent); }
 
@@ -181,6 +201,14 @@
             <button class="btn" onclick="enquirePG()">Send PG Enquiry</button>
         </div> 
 
+        <div class="promo-card">
+            <h3 style="color: var(--primary);">🎁 Claim an Exciting Coupon!</h3>
+            <p>Add your experience in our Google Maps to claim an exciting coupon on your next visit!</p>
+            <a href="https://search.google.com/local/writereview?placeid=ChIJKbfuWo29yzsRNmaNtWjRYaE" target="_blank" class="btn-review">
+                Write a Review on Google
+            </a>
+        </div>
+
         <div class="card" style="text-align: center; border-top: 4px solid var(--zomato-red);">
             <h3 style="color:var(--zomato-red); margin-bottom:10px;">Order Food Online</h3>
             <a href="https://www.zomato.com/hyderabad/srinika-grand-shamshabad" target="_blank" class="btn-zomato">Order via Zomato</a>
@@ -190,7 +218,6 @@
     <div id="menu" class="page">
         <div class="card">
             <h2 style="display:block; text-align:center; border:none;">RESTAURANT MENU</h2>
-            
             <div class="menu-cat">SOUPS</div>
             <div class="item"><span>Chicken Corn Soup</span><span class="price">110.00</span></div>
             <div class="item"><span>Veg Corn Soup</span><span class="price">100.00</span></div>
@@ -228,33 +255,19 @@
             <div class="item"><span>Apollo Fish / Chilly Fish</span><span class="price">250 / 250</span></div>
             <div class="item"><span>Egg Manchurian / 65</span><span class="price">150 / 170</span></div>
 
-            <div class="menu-cat">VEG CURRIES (Full)</div>
-            <div class="item"><span>Dal Fry / Tadka</span><span class="price">120 / 130</span></div>
-            <div class="item"><span>Aloo Gobi Masala</span><span class="price">180.00</span></div>
-            <div class="item"><span>Paneer Butter Masala</span><span class="price">240.00</span></div>
-            <div class="item"><span>Kadai / Kaju Paneer</span><span class="price">220 / 260</span></div>
-            <div class="item"><span>Malai Kofta</span><span class="price">200.00</span></div>
-
             <div class="menu-cat">NON VEG CURRIES (Full)</div>
             <div class="item"><span>Chicken Curry / Masala</span><span class="price">240 / 250</span></div>
             <div class="item"><span>Butter Chicken</span><span class="price">250.00</span></div>
-            <div class="item"><span>Hyderabad Chicken Curry</span><span class="price">290.00</span></div>
             <div class="item"><span>Mutton Masala / Rogan Josh</span><span class="price">330 / 340</span></div>
-            <div class="item"><span>Fish / Prawns Curry</span><span class="price">280 / 320</span></div>
 
             <div class="menu-cat">BIRYANIS (Full)</div>
             <div class="item"><span>Chicken Dum Biryani</span><span class="price">300.00</span></div>
             <div class="item"><span>Chicken Fry Piece Biryani</span><span class="price">310.00</span></div>
-            <div class="item"><span>Chicken 65 Biryani</span><span class="price">320.00</span></div>
             <div class="item"><span>Mutton Biryani</span><span class="price">350.00</span></div>
-            <div class="item"><span>Veg / Paneer Biryani</span><span class="price">250 / 280</span></div>
-            <div class="item"><span>Kaju Biryani</span><span class="price">300.00</span></div>
-
+            
             <div class="menu-cat">ROTI & BREADS</div>
             <div class="item"><span>Tandoori Roti (Butter)</span><span class="price">25.00</span></div>
-            <div class="item"><span>Butter Naan / Garlic Naan</span><span class="price">35 / 45</span></div>
-            <div class="item"><span>Paneer / Masala Kulcha</span><span class="price">60 / 50</span></div>
-            <div class="item"><span>Aloo Parota</span><span class="price">50.00</span></div>
+            <div class="item"><span>Butter Naan</span><span class="price">35.00</span></div>
         </div>
     </div>
 
@@ -279,10 +292,20 @@
             <h2>📍 Visit Us</h2>
             <div class="map-container">
                 <iframe src=https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3810.1026920997447!2d78.38409502378812!3d17.262266033603737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcbbd8d5aeeb729%3A0xa161d168b58d6636!2sSRINIKA%20GRAND!5e0!3m2!1sen!2sin!4v1775245111095!5m2!1sen!2sin width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    width="600" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 20px; text-align: center;">
                 <p><strong>Address:</strong> Srinika Grand, Shamshabad, Hyderabad, Telangana.</p>
                 <p><strong>Hotel Phone:</strong> +91 95059 95058</p>
+                <a href="https://search.google.com/local/writereview?placeid=ChIJKbfuWo29yzsRNmaNtWjRYaE" target="_blank" class="btn-review">
+                    Leave a Review
+                </a>
             </div>
         </div>
     </div>
